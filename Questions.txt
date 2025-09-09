@@ -1,0 +1,72 @@
+1 Write a program to check if a number is even or odd.
+
+2 Find the largest of three numbers using if-else.
+
+3 Print multiplication table of any number entered by the user.
+
+
+ 
+
+4 Check whether a character is a vowel or consonant.
+
+
+
+
+
+5 Reverse a number using loops (e.g., 123 → 321).
+
+6 Count the number of words in a given string.
+
+7 Check if a string is a palindrome (madam → true).
+
+8 Find the sum of digits of a number (123 → 6).
+
+9 Print the first 10 Fibonacci numbers.
+
+10 Find the factorial of a number using a loop.
+
+11 Remove all spaces from a string.
+
+12 Count vowels, consonants, digits, and spaces in a string.
+
+13 Check if a year is a leap year.
+
+14 Write a simple calculator using switch (add, subtract, multiply, divide).
+
+15 Print the following pattern for n = 5:
+
+*
+**
+***
+****
+*****
+
+
+16 Check whether a number is prime or not.
+
+17 Print all prime numbers up to 100.
+
+18 Check if a number is Armstrong (153 = 1³+5³+3³).
+
+19 Find the frequency of each character in a string.
+
+20 Reverse a string without using built-in functions.
+
+21 Check if two strings are anagrams (listen → silent).
+
+22 Print an inverted pyramid pattern:
+
+*****
+****
+***
+**
+*
+
+
+
+
+23 Find the largest digit in a number.
+
+24 Print the sum of all prime numbers up to n.
+
+25 Write a program that accepts a string and prints the character with the highest frequency.
