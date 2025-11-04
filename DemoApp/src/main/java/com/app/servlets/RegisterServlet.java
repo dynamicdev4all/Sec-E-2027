@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
+import com.app.database.DatabaseConnection;
 import com.app.services.SendOTP;
 
 /**
@@ -35,6 +36,8 @@ public class RegisterServlet extends HttpServlet {
 		String mobileNum = request.getParameter("mobileNum");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
+		
+		DatabaseConnection.saveUserData(firstName, lastName, Integer.parseInt(mobileNum), email, password);
 		
 		int OTP = (int) ((Math.random() * 900000) + 100000);
 		
