@@ -30,30 +30,47 @@ public class DatabaseConnection {
 	static MongoDatabase database = mongoClient.getDatabase("sece");
 	static MongoCollection<Document> c = database.getCollection("users");
 	
-	public static void saveUserData(String firstName, String lastName, int phone, String userEmail, String userPassword) {
-		
-		  c.insertOne(new Document("firstName", firstName)
- 				 .append("lastName", lastName)
- 				 .append("mobile", phone)
- 				 .append("userEmail", userEmail)
- 				 .append("userPassword", userPassword));
+//	public static void saveUserData(String firstName, String lastName, int phone, String userEmail, String userPassword) {
+//		
+//		  c.insertOne(new Document("firstName", firstName)
+// 				 .append("lastName", lastName)
+// 				 .append("mobile", phone)
+// 				 .append("userEmail", userEmail)
+// 				 .append("userPassword", userPassword));
+//		
+//	}
+	
+	public static boolean verifyUser(String email) {
+		try {
+			Document userSearch = new Document("userEmail", email);
+			Document userFound = c.find(userSearch).first();
+			if(userFound != null) {
+				Document updatedUser = new Document("$set", new Document("isVerified", true));
+				c.findOneAndUpdate(userFound, updatedUser);
+			}
+			return false;
+		} catch (Exception e) {
+			return false;
+		}
 		
 	}
 	
 	
-	public static void saveUserData2(String firstName, String lastName, int phone, String userEmail, String userPassword) {
-		
-		UserModel user = new UserModel(firstName, lastName, phone, userEmail, userPassword);		
-		  c.insertOne(new Document("firstName", UserModel.getFirstName())
-				 .append("lastName", UserModel.getLastName())
-				 .append("mobile", UserModel.getPhone())
-				 .append("userEmail", UserModel.getUserEmail())
-				 .append("userPassword", UserModel.getUserPassword()));
-		
+	public static boolean saveUserData(String firstName, String lastName, int phone, String userEmail, String userPassword) {
+		try {
+			  UserModel user = new UserModel(firstName, lastName, phone, userEmail, userPassword);		
+			  c.insertOne(new Document("firstName", UserModel.getFirstName())
+					 .append("lastName", UserModel.getLastName())
+					 .append("mobile", UserModel.getPhone())
+					 .append("userEmail", UserModel.getUserEmail())
+					 .append("userPassword", UserModel.getUserPassword())
+					 .append("isVerified", false));
+			  return true;
+		} catch (Exception e) {
+			return false;
+		}	
 	}
 	
-	public static void getUserByEmail() {
-		
-	}
+	
 }
 

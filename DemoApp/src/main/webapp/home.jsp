@@ -1,11 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
     <%
-    	String userName = (String) session.getAttribute("name_key");
-    if(userName == null){
-    	response.sendRedirect("login_page.html");
-    }
+    	String userEmail = (String)session.getAttribute("email_key");
     %>
 <!DOCTYPE html>
 <html>
@@ -15,6 +11,6 @@
 </head>
 <body>
 <h1>Welcome to the JSP Page</h1>
-<h2>Welcome, <%=userName %></h2>
+<h2>Welcome to the App, <%=userEmail %></h2>
 </body>
 </html>

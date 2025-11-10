@@ -9,6 +9,8 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
+import com.app.database.DatabaseConnection;
+
 /**
  * Servlet implementation class LoginServlet
  */
@@ -31,6 +33,11 @@ public class LoginServlet extends HttpServlet {
 		System.out.println("Data rec form login page");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
+		
+		
+		DatabaseConnection.getUserByEmail();
+		
+		
 		
 		if(email.equals("admin@rdec.in") && password.equals("123456")) {
 //			response.sendRedirect("index.html");

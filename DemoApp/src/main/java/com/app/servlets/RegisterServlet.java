@@ -37,18 +37,24 @@ public class RegisterServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		
-		DatabaseConnection.saveUserData(firstName, lastName, Integer.parseInt(mobileNum), email, password);
+		boolean saveDataStatus = DatabaseConnection.saveUserData(firstName, lastName, Integer.parseInt(mobileNum), email, password);
 		
-		int OTP = (int) ((Math.random() * 900000) + 100000);
-		
-		boolean OTPSendStatus = SendOTP.sendRegisterOTP(email, firstName + " " + lastName, OTP);
-		if(OTPSendStatus){
-			HttpSession session = request.getSession(); // new session create
-			session.setAttribute("sentOTP", OTP);
-			response.sendRedirect("verifyOTP.jsp");
+		if(saveDataStatus) {
+			int OTP = (int) ((Math.random() * 900000) + 100000);	
+			boolean OTPSendStatus = SendOTP.sendRegisterOTP(email, firstName + " " + lastName, OTP);
+			if(OTPSendStatus){
+				HttpSession session = request.getSession(); // new session create
+				session.setAttribute("sentOTP", OTP);
+				session.setAttribute("email", email);
+				response.sendRedirect("verifyOTP.jsp");
+			}else {
+				System.out.println("OTP sent Failed");
+			}
 		}else {
-			System.out.println("OTP sent Failed");
+			System.out.println("Data Save Failed");
 		}
+		
+		
 		
 	
 	}

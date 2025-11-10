@@ -9,6 +9,8 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
+import com.app.database.DatabaseConnection;
+
 /**
  * Servlet implementation class VerifyOTPServlet
  */
@@ -31,8 +33,9 @@ public class VerifyOTPServlet extends HttpServlet {
 		int enteredOTP =Integer.parseInt(request.getParameter("enteredOTP")); 
 		HttpSession session = request.getSession(false);
 		int sentOTP = (int)(session.getAttribute("sentOTP"));
+		String email = (String)(session.getAttribute("email"));
 		if(enteredOTP == sentOTP) {
-			System.out.println("OTP Verification Success");
+			DatabaseConnection.verifyUser(email);
 			session.removeAttribute("sentOTP");
 		}else {
 			System.out.println("OTP Verification Failed");
