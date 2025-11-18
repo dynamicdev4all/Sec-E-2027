@@ -2,6 +2,8 @@ package com.app.services;
 
 import java.util.Properties;
 
+import com.app.config.SecretReader;
+
 import jakarta.mail.Authenticator;
 import jakarta.mail.Message;
 import jakarta.mail.MessagingException;
@@ -13,8 +15,8 @@ import jakarta.mail.internet.MimeMessage;
 
 public class SendOTP {
 	public static boolean sendRegisterOTP( String to, String userName, int OTP) {
-		String from = "piebytwo014@gmail.com";
-		String fromPassword = "dvntxafkgfasyfkn";
+		String from = SecretReader.getSecrets("EMAIL_OTP_ID", "en", "US");
+		String fromPassword = SecretReader.getSecrets("EMAIL_OTP_PASSWORD", "en", "US");
 		Properties emailProperties = new Properties();
 		emailProperties.put("mail.smtp.host", "smtp.gmail.com");
 		emailProperties.put("mail.smtp.port", "587");

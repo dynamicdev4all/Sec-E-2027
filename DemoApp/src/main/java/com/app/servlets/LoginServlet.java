@@ -35,7 +35,6 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		
 		
-		DatabaseConnection.getUserByEmail();
 		
 		
 		

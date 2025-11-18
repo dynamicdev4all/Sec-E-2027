@@ -1,6 +1,7 @@
 package com.app.database;
 
 
+import com.app.config.SecretReader;
 import com.app.models.UserModel;
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
@@ -16,7 +17,7 @@ import shadow.com.nimbusds.oauth2.sdk.device.UserCode;
 import shadow.org.bson.Document;
 
 public class DatabaseConnection {
-	 static String connectionString = "mongodb+srv://piebytwo014:piebytwo014@cluster0.wpqa5jt.mongodb.net/?appName=Cluster0";
+	 static String connectionString = SecretReader.getSecrets("MONGO_DB_URI", "en", "US");
 
      static ServerApi serverApi = ServerApi.builder()
               .version(ServerApiVersion.V1)
