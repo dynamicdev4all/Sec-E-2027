@@ -14,7 +14,7 @@ import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 
 public class SendOTP {
-	public static boolean sendRegisterOTP( String to, String userName, int OTP) {
+	public static boolean sendRegisterOTP( String to, String userName, String token) {
 		String from = SecretReader.getSecrets("EMAIL_OTP_ID", "en", "US");
 		String fromPassword = SecretReader.getSecrets("EMAIL_OTP_PASSWORD", "en", "US");
 		Properties emailProperties = new Properties();
@@ -37,15 +37,24 @@ public class SendOTP {
 		
 		Message emailMsg = new MimeMessage(emailAuthSession);
 		
+		String link = "http://localhost:2020/DemoApp/AccountVerify?token="+token;
 		try {
 			emailMsg.setFrom(new InternetAddress(from));
 			emailMsg.setRecipients(Message.RecipientType.TO , InternetAddress.parse(to));
 			emailMsg.setSubject("Welcome onboard!");
+//			emailMsg.setText("Hey, " + userName +".\n\n"
+//					        +"Welcome to SEC-E APP. \n\n"
+//					        +"Please use OTP :" + OTP+ " to verify your account.\n\n"
+//					        +"Best Regards, \n"
+//					        +"Team Sec-E");
 			emailMsg.setText("Hey, " + userName +".\n\n"
-					        +"Welcome to SEC-E APP. \n\n"
-					        +"Please use OTP :" + OTP+ " to verify your account.\n\n"
-					        +"Best Regards, \n"
-					        +"Team Sec-E");
+			        +"Welcome to SEC-E APP. \n\n"
+			        +"Please use the link below to verify your account.\n\n"
+			        +"<a href=>"+link+"</a>"
+			        +"This link will expire in next 10 minutes. \n\n"
+			        +"Note : Please do not share this link with anyone. \n\n"
+			        +"Best Regards, \n"
+			        +"Team Sec-E");
 			Transport.send(emailMsg);
 			System.out.println("Email Sent Success");
 			return true;
