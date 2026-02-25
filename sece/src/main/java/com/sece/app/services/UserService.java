@@ -20,8 +20,8 @@ public class UserService {
 		return repo.createUser(newUser);
 	}
 	
-	public void loginService() {
-		
+	public User loginService(int id, String email, String pass) {
+		return repo.loginUser(id, email, pass);
 	}
 	
 	public ArrayList<User> showAllService() {

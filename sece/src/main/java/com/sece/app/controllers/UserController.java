@@ -33,6 +33,9 @@ public class UserController {
 		return "Registration Failed.";
 	}
 	
+	public void login(int id, Map<String, String> loginUser) {
+		User user = service.loginService(id, loginUser.get("email"), loginUser.get("pass"));
+	}
 	//Show All
 	
 	@GetMapping("/user/showAll")

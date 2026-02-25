@@ -24,8 +24,14 @@ public class UserRepository {
 		}
 	}
 	
-	public void loginUser() {
-		
+	public User loginUser(int id, String email, String pass) {
+		User user = db.get(id);
+		if(user != null) {
+			if(user.getEmail().equals(email) && user.getPass().equals(pass)) {
+				return user;
+			}
+		}
+		return null;
 	}
 	
 	public ArrayList<User> showAll() {
