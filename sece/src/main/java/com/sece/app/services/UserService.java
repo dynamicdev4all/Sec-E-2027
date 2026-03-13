@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.sece.app.models.User;
 import com.sece.app.repositories.UserRepository;
+import com.sece.app.util.CustomError;
 
 @Service
 public class UserService {
@@ -16,11 +17,11 @@ public class UserService {
 	@Autowired
 	UserRepository repo;
 	
-	public User registerService(User newUser) {
+	public CustomError registerService(User newUser) {
 		return repo.createUser(newUser);
 	}
 	
-	public User loginService(int id, String email, String pass) {
+	public CustomError loginService(int id, String email, String pass) {
 		return repo.loginUser(id, email, pass);
 	}
 	

@@ -1,6 +1,14 @@
 package com.sece.app.models;
 
 public class User {
+	public boolean isBanned() {
+		return isBanned;
+	}
+
+	public void setBanned(boolean isBanned) {
+		this.isBanned = isBanned;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -17,13 +25,15 @@ public class User {
 		this.pass = pass;
 	}
 
-	public User(int id, String name, long phone, String address, String upi) {
+	public User(int id, String name, String email, String pass, long phone, String address, String upi) {
 		this.id = id;
 		this.name = name;
 		this.phone = phone;
 		this.address = address;
 		this.upi = upi;
-		
+		this.email = email;
+		this.pass = pass;
+		this.isBanned = false;		
 	}
 	
 	User(){
@@ -66,4 +76,5 @@ public class User {
 	String upi;
 	String email;
 	String pass;
+	boolean isBanned;
 }

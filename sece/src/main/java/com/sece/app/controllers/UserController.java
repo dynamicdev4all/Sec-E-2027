@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sece.app.models.User;
 import com.sece.app.services.UserService;
+import com.sece.app.util.CustomError;
 
 import jakarta.websocket.server.PathParam;
 
@@ -25,16 +26,25 @@ public class UserController {
 	//Register
 	
 	@PostMapping("/user/register")
-	public String createUser(@RequestBody User newUser) {
-		User user = service.registerService(newUser);
-		if(user != null) {
-			return "Registration Successful.";
-		}
-		return "Registration Failed.";
+	public String createUser(@RequestBody Map<String, String> registerUser) {
+		int id = Integer.parseInt(registerUser.get("id"));
+		String name = registerUser.get("name");
+		long phone = Long.parseLong(registerUser.get("phone"));
+		String add = registerUser.get("address");
+		String upi = registerUser .get("upi");
+		String email = registerUser .get("email");
+		String pass = registerUser .get("pass");
+		
+		
+		User newUser = new User(id, name, email, pass, phone, add, upi);
+		CustomError user = service.registerService(newUser);
+		return user.getMsg();
 	}
 	
-	public void login(int id, Map<String, String> loginUser) {
-		User user = service.loginService(id, loginUser.get("email"), loginUser.get("pass"));
+	@PostMapping("/user/login")
+	public String login(int id, @RequestBody Map<String, String> loginUser) {
+		CustomError log =  service.loginService(id, loginUser.get("email"), loginUser.get("pass"));	
+		return log.getMsg();
 	}
 	//Show All
 	
